@@ -636,8 +636,8 @@ class IndexTTS2:
                             print(f"!!! Falling back to default duration logic for {seg_idx} segment")
                         else:
                             duration_ratio = len_current / len_total
-                            print(f">> Generating segment {seg_idx}: {duration_ratio*100:.2f}% of total audio duration ({int(target_chunk_ms)}ms)")
                             target_chunk_ms = speech_length * duration_ratio
+                            print(f">> Generating segment {seg_idx}: {duration_ratio*100:.2f}% of total audio duration ({int(target_chunk_ms)}ms)")
                             len_tensor = torch.LongTensor([int(speech_length*duration_ratio)])
                             len_tensor = len_tensor.to(self.device)
                             target_lengths = torch.clamp((len_tensor/frame_duration).long(), min=1)
